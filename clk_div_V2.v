@@ -1,12 +1,12 @@
-// clock divider from the 10 MHz input clock to a 1 Hz clock
+// clock divider from the 10 MHz input clock to a 5 Hz clock
 module clk_div_V2(clk, reset, clk_out);
 
     input clk;
     input reset;
     output clk_out;
 
-    reg [17:0] counter;
-    wire [17:0] counterplus;
+    reg [2:0] counter;
+    wire [2:0] counterplus;
     reg clk_track;
 
     always @(posedge clk or negedge reset)
@@ -16,7 +16,7 @@ module clk_div_V2(clk, reset, clk_out);
             counter = 0;
             clk_track <= 0;
         end
-        else if(counterplus == 200000) begin
+        else if(counterplus == 4) begin
             counter = 0;
             clk_track <= ~clk_track;
         end

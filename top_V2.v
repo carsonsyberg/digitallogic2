@@ -41,6 +41,13 @@ module top_V2(SW, HEX0, HEX1, HEX2, HEX4, HEX5, LEDR, ADC_CLK_10, KEY);
     
     assign LEDR[0] = ~key0Latch_n;
 
+    initial begin
+        key0Latch_n = 0;
+        key1Latch_n = 1;
+        lsd9Counter = 1;
+        msd9Counter = 0;
+    end
+
     always @(posedge clockDivOutput or negedge key0Latch_n) begin
         if(~key0Latch_n) // reset active
             lsd9Counter <= 1;
